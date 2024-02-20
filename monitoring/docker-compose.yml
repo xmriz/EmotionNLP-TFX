@@ -1,0 +1,25 @@
+version: '3.7'
+
+services:
+  prometheus:
+    image: prom/prometheus:v2.41.0
+    container_name: prometheus
+    volumes:
+      - ./prometheus_docker_compose.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"
+    networks:
+      - default_network
+
+  grafana:
+    image: grafana/grafana:9.3.2
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    networks:
+      - default_network
+
+
+networks:
+  default_network:
+    name: default_network
